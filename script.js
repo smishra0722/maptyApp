@@ -59,9 +59,7 @@ class Cycling extends Workout {
     }
 }
 
-// const run1 = new Running([39, -12], 5.2, 24, 178);
-// const cycling1 = new Cycling([39, -12], 27, 95, 523);
-// console.log(run1, cycling1);
+
 
 //////////////////////////////////////////////////////////////////////////////////
 // APPLICATION ARCHITECTURE
@@ -99,11 +97,9 @@ class App {
     _loadMap(position) {
         const {latitude} = position.coords;
         const {longitude} = position.coords;
-        console.log(position);
     
         //Leaflet
         const coords = [latitude, longitude];
-        console.log(this);
         this.#map = L.map('map').setView(coords, this.#mapZoomLevel);
         L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
         maxZoom: 20,
@@ -171,7 +167,6 @@ class App {
         }
         //Add new object to workout array
         this.#workouts.push(workout);
-        console.log(workout);
 
         //Render workout on map as marker
         this._renderWorkoutMarker(workout, lat, lng);
@@ -256,7 +251,6 @@ class App {
         if(!workoutEl) return;
 
         const workout = this.#workouts.find(work => work.id === workoutEl.dataset.id);
-        console.log(workout);
 
         this.#map.setView(workout.coords, this.#mapZoomLevel, {
             animate: true,
@@ -266,7 +260,7 @@ class App {
         });
 
         // using the public interface
-        workout.click();
+        
     }
 
     _setLocalStorage() {
@@ -275,7 +269,6 @@ class App {
 
     _getLocalStorage() {
        const data = JSON.parse(localStorage.getItem('workouts'));
-       console.log(data);
 
        if(!data) return;
 
